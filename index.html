@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
+            color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
@@ -56,8 +56,7 @@
                 10vw 10vh 0 0 #fff, 20vw 80vh 0 0 #fff, 30vw 30vh 0 0 #fff,
                 40vw 50vh 0 0 #fff, 50vw 10vh 0 0 #fff, 60vw 90vh 0 0 #fff,
                 70vw 20vh 0 0 #fff, 80vw 60vh 0 0 #fff, 90vw 40vh 0 0 #fff,
-                15vw 45vh 0 0 #fff, 85vw 15vh 0 0 #fff, 55vw 75vh 0 0 #fff,
-                25vw 65vh 0 0 #fff, 75vw 35vh 0 0 #fff, 45vw 85vh 0 0 #fff;
+                15vw 45vh 0 0 #fff, 85vw 15vh 0 0 #fff, 55vw 75vh 0 0 #fff;
             animation: twinkle 4s infinite alternate;
         }
         .stars::after {
@@ -90,12 +89,12 @@
         }
 
         .earth {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
             background: radial-gradient(circle at 30% 30%, #4facfe, #005bea);
             border-radius: 50%;
             box-shadow: 
-                0 0 60px rgba(79, 172, 254, 0.4), 
+                0 0 80px rgba(79, 172, 254, 0.5), 
                 inset -30px -30px 60px rgba(0, 0, 0, 0.8);
             position: relative;
             overflow: hidden;
@@ -132,22 +131,22 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 380px;
-            height: 380px;
+            width: 400px;
+            height: 400px;
             transform: translate(-50%, -50%);
-            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             animation: rotateOrbit 15s linear infinite;
         }
 
         .airplane {
             position: absolute;
-            top: -16px;
+            top: -18px;
             left: 50%;
             transform: translateX(-50%) rotate(90deg);
-            width: 36px;
-            height: 36px;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
         }
 
         @keyframes rotateOrbit {
@@ -156,7 +155,7 @@
         }
 
         /* =========================================
-           KONTEN UTAMA
+           KONTEN UTAMA (TRANSPARAN / GLASSMORPHISM)
            ========================================= */
         .content-wrapper {
             position: relative;
@@ -165,9 +164,10 @@
         }
 
         header {
-            background: rgba(30, 60, 114, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            /* Latar belakang sangat transparan */
+            background: rgba(0, 0, 0, 0.2); 
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             color: white;
             text-align: center;
             padding: 3rem 1rem;
@@ -175,15 +175,16 @@
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
             letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 15px rgba(79, 172, 254, 0.6);
         }
 
         header p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             opacity: 0.9;
+            color: #e2e8f0;
         }
 
         .container {
@@ -196,19 +197,20 @@
             justify-content: center;
         }
 
-        /* Kartu Menu dengan Efek Glassmorphism */
+        /* Kartu Menu dengan Efek Kaca Sangat Transparan */
         .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            /* Ubah opacity menjadi 0.15 agar background terlihat jelas */
+            background: rgba(255, 255, 255, 0.1); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 16px;
             padding: 2.5rem 2rem;
             width: 100%;
             max-width: 300px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -216,25 +218,30 @@
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.95);
+            /* Sedikit lebih terang saat di-hover agar tetap readable */
+            background: rgba(255, 255, 255, 0.15); 
+            box-shadow: 0 15px 40px rgba(79, 172, 254, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
         }
 
         .card-icon {
             font-size: 3.5rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
         }
 
         .card h2 {
             font-size: 1.5rem;
-            color: #1e3c72;
+            color: #4facfe; /* Warna biru terang agar kontras */
             margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .card p {
             font-size: 0.95rem;
-            color: #555;
+            color: #e2e8f0; /* Abu-abu sangat terang */
             margin-bottom: 1.5rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         /* Tombol Link */
@@ -246,39 +253,41 @@
             border-radius: 8px;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
-        .btn-belajar { background: linear-gradient(135deg, #27ae60, #2ecc71); }
-        .btn-belajar:hover { background: linear-gradient(135deg, #219150, #27ae60); }
+        .btn-belajar { background: linear-gradient(135deg, rgba(39, 174, 96, 0.8), rgba(46, 204, 113, 0.8)); }
+        .btn-belajar:hover { background: linear-gradient(135deg, rgba(39, 174, 96, 1), rgba(46, 204, 113, 1)); }
 
-        .btn-buku { background: linear-gradient(135deg, #e67e22, #f39c12); }
-        .btn-buku:hover { background: linear-gradient(135deg, #d35400, #e67e22); }
+        .btn-buku { background: linear-gradient(135deg, rgba(230, 126, 34, 0.8), rgba(243, 156, 18, 0.8)); }
+        .btn-buku:hover { background: linear-gradient(135deg, rgba(230, 126, 34, 1), rgba(243, 156, 18, 1)); }
 
-        .btn-museum { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
-        .btn-museum:hover { background: linear-gradient(135deg, #732d91, #8e44ad); }
+        .btn-museum { background: linear-gradient(135deg, rgba(142, 68, 173, 0.8), rgba(155, 89, 182, 0.8)); }
+        .btn-museum:hover { background: linear-gradient(135deg, rgba(142, 68, 173, 1), rgba(155, 89, 182, 1)); }
 
-        /* Footer */
+        /* Footer Transparan */
         footer {
             text-align: center;
             padding: 2rem;
-            background: rgba(30, 60, 114, 0.85);
-            backdrop-filter: blur(10px);
-            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #cbd5e1;
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Responsif untuk layar kecil */
         @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
-            .earth { width: 140px; height: 140px; }
-            .orbit { width: 260px; height: 260px; }
+            header h1 { font-size: 2.2rem; }
+            .earth { width: 150px; height: 150px; }
+            .orbit { width: 280px; height: 280px; }
             .container { flex-direction: column; align-items: center; }
             .card { max-width: 100%; }
         }
