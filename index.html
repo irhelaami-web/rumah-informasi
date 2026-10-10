@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rumah Tau</title>
     <style>
-        /* Reset dasar */
+        /* Reset Dasar */
         * {
             margin: 0;
             padding: 0;
@@ -14,24 +14,171 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
         }
 
-        /* Header */
+        /* =========================================
+           LATAR BELAKANG ANIMASI (LUAR ANGKASA)
+           ========================================= */
+        .space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            z-index: -2;
+        }
+
+        /* Efek Bintang Berkelip */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 
+                10vw 10vh 0 0 #fff, 20vw 80vh 0 0 #fff, 30vw 30vh 0 0 #fff,
+                40vw 50vh 0 0 #fff, 50vw 10vh 0 0 #fff, 60vw 90vh 0 0 #fff,
+                70vw 20vh 0 0 #fff, 80vw 60vh 0 0 #fff, 90vw 40vh 0 0 #fff,
+                15vw 45vh 0 0 #fff, 85vw 15vh 0 0 #fff, 55vw 75vh 0 0 #fff,
+                25vw 65vh 0 0 #fff, 75vw 35vh 0 0 #fff, 45vw 85vh 0 0 #fff;
+            animation: twinkle 4s infinite alternate;
+        }
+        .stars::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            box-shadow: 
+                5vw 90vh 0 0 rgba(255,255,255,0.6), 35vw 20vh 0 0 rgba(255,255,255,0.6),
+                65vw 50vh 0 0 rgba(255,255,255,0.6), 95vw 10vh 0 0 rgba(255,255,255,0.6);
+            animation: twinkle 6s infinite alternate-reverse;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Animasi Bumi */
+        .earth-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .earth {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #4facfe, #005bea);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px rgba(79, 172, 254, 0.4), 
+                inset -30px -30px 60px rgba(0, 0, 0, 0.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Benua di Bumi (CSS Murni) */
+        .earth::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            width: 50%;
+            height: 35%;
+            background: #2ecc71;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+        .earth::after {
+            content: '';
+            position: absolute;
+            bottom: 15%;
+            right: 10%;
+            width: 45%;
+            height: 45%;
+            background: #27ae60;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            opacity: 0.8;
+            filter: blur(1px);
+        }
+
+        /* Animasi Orbit dan Pesawat */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 380px;
+            height: 380px;
+            transform: translate(-50%, -50%);
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            animation: rotateOrbit 15s linear infinite;
+        }
+
+        .airplane {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg);
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+        }
+
+        @keyframes rotateOrbit {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* =========================================
+           KONTEN UTAMA
+           ========================================= */
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+            padding-bottom: 2rem;
+        }
+
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: rgba(30, 60, 114, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             color: white;
             text-align: center;
             padding: 3rem 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         header p {
@@ -39,7 +186,6 @@
             opacity: 0.9;
         }
 
-        /* Container Utama */
         .container {
             max-width: 1000px;
             margin: 3rem auto;
@@ -50,15 +196,18 @@
             justify-content: center;
         }
 
-        /* Kartu Menu */
+        /* Kartu Menu dengan Efek Glassmorphism */
         .card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
             width: 100%;
             max-width: 300px;
             text-align: center;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -66,120 +215,134 @@
         }
 
         .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .card-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
         }
 
         .card h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: #1e3c72;
             margin-bottom: 1rem;
         }
 
         .card p {
             font-size: 0.95rem;
-            color: #666;
+            color: #555;
             margin-bottom: 1.5rem;
         }
 
         /* Tombol Link */
         .btn {
             display: inline-block;
-            background-color: #3498db;
             color: white;
             text-decoration: none;
             padding: 0.8rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         .btn:hover {
-            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* Warna khusus untuk setiap tombol agar bervariasi */
-        .btn-belajar { background-color: #27ae60; }
-        .btn-belajar:hover { background-color: #219150; }
+        .btn-belajar { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .btn-belajar:hover { background: linear-gradient(135deg, #219150, #27ae60); }
 
-        .btn-buku { background-color: #e67e22; }
-        .btn-buku:hover { background-color: #d35400; }
+        .btn-buku { background: linear-gradient(135deg, #e67e22, #f39c12); }
+        .btn-buku:hover { background: linear-gradient(135deg, #d35400, #e67e22); }
 
-        .btn-museum { background-color: #8e44ad; }
-        .btn-museum:hover { background-color: #732d91; }
+        .btn-museum { background: linear-gradient(135deg, #8e44ad, #9b59b6); }
+        .btn-museum:hover { background: linear-gradient(135deg, #732d91, #8e44ad); }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 2rem;
-            background-color: #1e3c72;
+            background: rgba(30, 60, 114, 0.85);
+            backdrop-filter: blur(10px);
             color: white;
-            margin-top: 3rem;
             font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Responsif untuk layar kecil */
         @media (max-width: 600px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .card {
-                max-width: 100%;
-            }
+            header h1 { font-size: 2rem; }
+            .earth { width: 140px; height: 140px; }
+            .orbit { width: 260px; height: 260px; }
+            .container { flex-direction: column; align-items: center; }
+            .card { max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>🏠 Rumah Tau</h1>
-        <p>Gerbang Pengetahuan dan Eksplorasi Tanpa Batas</p>
-    </header>
-
-    <main class="container">
-        <!-- Kartu 1: Rumah Belajar -->
-        <div class="card">
-            <div>
-                <div class="card-icon">🎓</div>
-                <h2>Rumah Belajar</h2>
-                <p>Akses platform pembelajaran interaktif dan materi edukasi terlengkap untuk mendukung proses belajar mengajar.</p>
-            </div>
-            <a href="https://script.google.com/a/macros/guru.sma.belajar.id/s/AKfycbyOZEpGf30u-EoECa5v1RZA-xXzrB3Vwoz5vPbu2wc6yCYaEKA092hTTpgmph2JZ-e5/exec" target="_blank" class="btn btn-belajar">Buka Rumah Belajar</a>
+    <!-- Latar Belakang Animasi -->
+    <div class="space-background"></div>
+    <div class="stars"></div>
+    
+    <div class="earth-container">
+        <div class="earth"></div>
+        <div class="orbit">
+            <!-- Ikon Pesawat SVG -->
+            <svg class="airplane" viewBox="0 0 24 24" fill="white">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+            </svg>
         </div>
+    </div>
 
-        <!-- Kartu 2: Jelajah Buku -->
-        <div class="card">
-            <div>
-                <div class="card-icon">📚</div>
-                <h2>Jelajah Buku</h2>
-                <p>Jelajahi katalog perpustakaan nasional secara digital. Temukan ribuan buku dan referensi akademik secara gratis.</p>
+    <!-- Konten Utama -->
+    <div class="content-wrapper">
+        <header>
+            <h1>🏠 Rumah Tau</h1>
+            <p>Gerbang Pengetahuan dan Eksplorasi Tanpa Batas</p>
+        </header>
+
+        <main class="container">
+            <!-- Kartu 1: Rumah Belajar -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">🎓</div>
+                    <h2>Rumah Belajar</h2>
+                    <p>Akses platform pembelajaran interaktif dan materi edukasi terlengkap untuk mendukung proses belajar mengajar.</p>
+                </div>
+                <a href="https://script.google.com/a/macros/guru.sma.belajar.id/s/AKfycbyOZEpGf30u-EoECa5v1RZA-xXzrB3Vwoz5vPbu2wc6yCYaEKA092hTTpgmph2JZ-e5/exec" target="_blank" class="btn btn-belajar">Buka Rumah Belajar</a>
             </div>
-            <a href="https://opac.perpusnas.go.id/" target="_blank" class="btn btn-buku">Buka Jelajah Buku</a>
-        </div>
 
-        <!-- Kartu 3: Jelajah Museum -->
-        <div class="card">
-            <div>
-                <div class="card-icon">🏛️</div>
-                <h2>Jelajah Museum</h2>
-                <p>Nikmati pengalaman tur virtual ke berbagai museum di Indonesia. Belajar sejarah dan budaya dari mana saja.</p>
+            <!-- Kartu 2: Jelajah Buku -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">📚</div>
+                    <h2>Jelajah Buku</h2>
+                    <p>Jelajahi katalog perpustakaan nasional secara digital. Temukan ribuan buku dan referensi akademik secara gratis.</p>
+                </div>
+                <a href="https://opac.perpusnas.go.id/" target="_blank" class="btn btn-buku">Buka Jelajah Buku</a>
             </div>
-            <a href="https://indonesiavirtualtour.com/vr-tour/kategori/c/museum" target="_blank" class="btn btn-museum">Buka Jelajah Museum</a>
-        </div>
-    </main>
 
-    <footer>
-        <p>&copy; 2026 Rumah Tau. Dibuat untuk mendukung literasi dan edukasi Indonesia.</p>
-    </footer>
+            <!-- Kartu 3: Jelajah Museum -->
+            <div class="card">
+                <div>
+                    <div class="card-icon">🏛️</div>
+                    <h2>Jelajah Museum</h2>
+                    <p>Nikmati pengalaman tur virtual ke berbagai museum di Indonesia. Belajar sejarah dan budaya dari mana saja.</p>
+                </div>
+                <a href="https://indonesiavirtualtour.com/vr-tour/kategori/c/museum" target="_blank" class="btn btn-museum">Buka Jelajah Museum</a>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Rumah Tau. Dibuat untuk mendukung literasi dan edukasi Indonesia.</p>
+        </footer>
+    </div>
 
 </body>
 </html>
